@@ -1,0 +1,61 @@
+<section class="cia-card tech-section">
+  <h2 class="cia-section-title">Technologies</h2>
+
+  <div class="cia-fact-grid">
+    <div class="cia-fact">
+      <span class="cia-fact__label">Lenguaje</span>
+      <span class="cia-fact__value">{{ technology.language ?? 'No determinado' }}</span>
+    </div>
+    <div class="cia-fact">
+      <span class="cia-fact__label">Package manager</span>
+      <span class="cia-fact__value">{{ technology.packageManager ?? 'No determinado' }}</span>
+    </div>
+    <div class="cia-fact">
+      <span class="cia-fact__label">Build tool</span>
+      <span class="cia-fact__value">{{ technology.buildTool ?? 'No determinado' }}</span>
+    </div>
+    <div class="cia-fact">
+      <span class="cia-fact__label">TypeScript</span>
+      <span class="cia-fact__value">{{ technology.typescript ? 'Sí' : 'No' }}</span>
+    </div>
+  </div>
+
+  <div class="cia-group">
+    <h3 class="cia-group-title">Frameworks</h3>
+    @if (technology.frameworks.length) {
+      <div class="cia-tag-list">
+        @for (fw of technology.frameworks; track fw) {
+          <cia-badge tone="brand">{{ fw }}</cia-badge>
+        }
+      </div>
+    } @else {
+      <cia-empty-state message="No se detectaron frameworks con evidencia suficiente." />
+    }
+  </div>
+
+  <div class="cia-group">
+    <h3 class="cia-group-title">Tecnologías</h3>
+    @if (technology.technologies.length) {
+      <div class="cia-tag-list">
+        @for (t of technology.technologies; track t) {
+          <cia-badge>{{ t }}</cia-badge>
+        }
+      </div>
+    } @else {
+      <cia-empty-state message="No se detectaron tecnologías adicionales." />
+    }
+  </div>
+
+  <div class="cia-group">
+    <h3 class="cia-group-title">Evidence</h3>
+    @if (technology.evidence.length) {
+      <ul class="cia-evidence-list">
+        @for (e of technology.evidence; track e) {
+          <li>{{ e }}</li>
+        }
+      </ul>
+    } @else {
+      <cia-empty-state message="No hay evidencia registrada." />
+    }
+  </div>
+</section>

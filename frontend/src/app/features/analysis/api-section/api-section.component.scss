@@ -1,0 +1,39 @@
+.endpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.endpoint-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--cia-radius-sm);
+  background: var(--cia-surface-alt);
+  border: 1px solid var(--cia-border);
+  font-family: var(--cia-font-mono);
+  font-size: 12.5px;
+}
+
+.endpoint-row__path {
+  font-weight: 600;
+  color: var(--cia-text);
+  flex-shrink: 0;
+}
+
+.endpoint-row__file {
+  color: var(--cia-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+@media (max-width: 560px) {
+  .endpoint-row__file {
+    display: none;
+  }
+}

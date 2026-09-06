@@ -1,0 +1,40 @@
+<section class="cia-card insights-section">
+  <div class="cia-group">
+    <h2 class="cia-section-title">Findings</h2>
+    @if (findings.length) {
+      <div class="cia-item-list">
+        @for (f of findings; track f) {
+          <div class="cia-item-card">{{ f }}</div>
+        }
+      </div>
+    } @else {
+      <p class="cia-empty">No se generaron hallazgos para este repositorio.</p>
+    }
+  </div>
+
+  <div class="cia-group">
+    <h2 class="cia-section-title">Risks</h2>
+    @if (risks.length) {
+      <div class="cia-item-list">
+        @for (r of risks; track r) {
+          <div class="cia-item-card cia-item-card--warning">{{ r }}</div>
+        }
+      </div>
+    } @else {
+      <p class="cia-empty">No se detectaron riesgos críticos automáticamente.</p>
+    }
+  </div>
+
+  <div class="cia-group">
+    <h2 class="cia-section-title">Recommendations</h2>
+    @if (recommendations.length) {
+      <div class="cia-item-list">
+        @for (rec of recommendations; track rec) {
+          <div class="cia-item-card cia-item-card--success">{{ rec }}</div>
+        }
+      </div>
+    } @else {
+      <p class="cia-empty">No hay recomendaciones adicionales.</p>
+    }
+  </div>
+</section>

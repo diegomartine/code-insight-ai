@@ -1,0 +1,46 @@
+<section class="cia-card api-section">
+  <h2 class="cia-section-title">APIs</h2>
+
+  <div class="cia-fact-grid">
+    <div class="cia-fact">
+      <span class="cia-fact__label">Backend</span>
+      <span class="cia-fact__value">{{ apis.backend.total }} archivo(s)</span>
+    </div>
+    <div class="cia-fact">
+      <span class="cia-fact__label">Frontend</span>
+      <span class="cia-fact__value">{{ apis.frontend.total }} archivo(s)</span>
+    </div>
+    <div class="cia-fact">
+      <span class="cia-fact__label">Endpoints detectados</span>
+      <span class="cia-fact__value">{{ apis.endpoints.length }}</span>
+    </div>
+  </div>
+
+  <div class="cia-group">
+    <h3 class="cia-group-title">Backend endpoints</h3>
+    @if (apis.endpoints.length) {
+      <div class="endpoint-list">
+        @for (ep of apis.endpoints; track ep.method + ep.path + ep.file) {
+          <div class="endpoint-row">
+            <cia-badge [tone]="methodTone(ep.method)">{{ ep.method }}</cia-badge>
+            <span class="endpoint-row__path">{{ ep.path }}</span>
+            <span class="endpoint-row__file">{{ ep.file }}</span>
+          </div>
+        }
+      </div>
+    } @else {
+      <cia-empty-state message="No se detectaron endpoints backend." />
+    }
+  </div>
+
+  @if (apis.frontend.total > 0) {
+    <div class="cia-group">
+      <h3 class="cia-group-title">Archivos con consumo de API (frontend)</h3>
+      <ul class="cia-evidence-list">
+        @for (f of apis.frontend.detectedFiles; track f) {
+          <li>{{ f }}</li>
+        }
+      </ul>
+    </div>
+  }
+</section>

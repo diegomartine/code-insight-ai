@@ -1,0 +1,141 @@
+<section class="cia-card input-card">
+  <h2 class="cia-section-title">Analizar repositorio</h2>
+  <p class="cia-section-subtitle">
+    Elige una URL pública de GitHub o sube un archivo ZIP del proyecto.
+  </p>
+
+  <div class="tabs" role="tablist">
+    <button
+      type="button"
+      role="tab"
+      class="tabs__btn"
+      [class.tabs__btn--active]="mode() === 'github'"
+      [disabled]="loading"
+      (click)="setMode('github')"
+    >
+      GitHub
+    </button>
+
+    <button
+      type="button"
+      role="tab"
+      class="tabs__btn"
+      [class.tabs__btn--active]="mode() === 'zip'"
+      [disabled]="loading"
+      (click)="setMode('zip')"
+    >
+      Archivo ZIP
+    </button>
+  </div>
+
+  @if (mode() === "github") {
+    <div class="github-form">
+      <label class="field-label" for="repo-url"> URL del repositorio </label>
+
+      <div class="field-row">
+        <input
+          id="repo-url"
+          type="text"
+          class="text-input"
+          placeholder="https://github.com/usuario/repositorio"
+          [formControl]="githubUrlControl"
+          [class.text-input--invalid]="
+            githubUrlControl.invalid && githubUrlControl.touched
+          "
+          (keyup.enter)="submitGithub()"
+        />
+
+        <button
+          type="button"
+          class="cia-btn cia-btn--primary"
+          [disabled]="loading"
+          (click)="submitGithub()"
+        >
+          @if (loading) {
+            Analizando…
+          } @else {
+            Analizar GitHub
+          }
+        </button>
+      </div>
+
+      @if (githubUrlControl.invalid && githubUrlControl.touched) {
+        <p class="field-error">
+          @if (githubUrlControl.hasError("required")) {
+            La URL del repositorio es obligatoria.
+          } @else {
+            Debe ser una URL válida con el formato
+            https://github.com/usuario/repositorio
+          }
+        </p>
+      }
+    </div>
+  } @else {
+    <div class="zip-zone">
+      <div
+        class="dropzone"
+        [class.dropzone--drag]="isDragOver()"
+        [class.dropzone--disabled]="loading"
+        (drop)="onDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave()"
+      >
+        <input
+          type="file"
+          id="zip-input"
+          accept=".zip,application/zip,application/x-zip-compressed"
+          class="dropzone__input"
+          [disabled]="loading"
+          (change)="onFileSelected($event)"
+        />
+
+        @if (!selectedFile()) {
+          <label for="zip-input" class="dropzone__label">
+            <span class="dropzone__title">
+              Arrastra tu ZIP aquí o haz clic para seleccionarlo
+            </span>
+            <span class="dropzone__hint"> Tamaño máximo 50 MB </span>
+          </label>
+        } @else {
+          <div class="dropzone__file">
+            <div class="dropzone__file-info">
+              <span class="dropzone__file-name">
+                {{ selectedFile()!.name }}
+              </span>
+
+              <span class="dropzone__file-size">
+                {{ formatFileSize(selectedFile()!.size) }}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              class="cia-btn cia-btn--ghost dropzone__remove"
+              [disabled]="loading"
+              (click)="clearFile()"
+            >
+              Quitar
+            </button>
+          </div>
+        }
+      </div>
+
+      @if (zipError()) {
+        <p class="field-error">{{ zipError() }}</p>
+      }
+
+      <button
+        type="button"
+        class="cia-btn cia-btn--primary zip-submit"
+        [disabled]="loading || !selectedFile()"
+        (click)="submitZip()"
+      >
+        @if (loading) {
+          Analizando…
+        } @else {
+          Analizar ZIP
+        }
+      </button>
+    </div>
+  }
+</section>

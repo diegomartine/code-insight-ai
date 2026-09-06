@@ -1,0 +1,33 @@
+<section class="cia-card code-samples-section">
+  <h2 class="cia-section-title">Evidence / Code Samples</h2>
+  <p class="cia-section-subtitle">
+    Fragmentos de los archivos usados como evidencia para el análisis
+    (limitados, no el código completo).
+  </p>
+
+  @if (!displaySamples.length) {
+    <cia-empty-state message="No hay code samples disponibles." />
+  } @else {
+    <div class="samples-list">
+      @for (sample of displaySamples; track sample.path) {
+        <div class="sample">
+          <div class="sample__header">
+            <span class="sample__path">{{ sample.path }}</span>
+          </div>
+          <pre
+            class="sample__code"
+          ><code>{{ isExpanded(sample.path) ? sample.full : sample.preview }}</code></pre>
+          @if (sample.isTruncated) {
+            <button
+              type="button"
+              class="cia-btn cia-btn--ghost sample__toggle"
+              (click)="toggle(sample.path)"
+            >
+              {{ isExpanded(sample.path) ? "Ver menos" : "Ver código" }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+  }
+</section>

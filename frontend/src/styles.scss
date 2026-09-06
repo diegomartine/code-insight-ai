@@ -1,0 +1,286 @@
+/* ============================================================
+   Code Insight AI — design tokens y estilos globales
+   Paleta contenida, tipografía Inter, look "herramienta SaaS
+   de análisis técnico" — nada de colores excesivos ni emojis.
+   ============================================================ */
+
+:root {
+  /* Superficies */
+  --cia-bg: #f6f7fb;
+  --cia-surface: #ffffff;
+  --cia-surface-alt: #fafbfc;
+  --cia-border: #e4e7ec;
+  --cia-border-strong: #d0d5dd;
+
+  /* Texto */
+  --cia-text: #1a1d29;
+  --cia-text-secondary: #4b5162;
+  --cia-text-muted: #8a90a2;
+
+  /* Marca / acento (índigo, un único color de acento) */
+  --cia-brand: #4f46e5;
+  --cia-brand-dark: #3730a3;
+  --cia-brand-light: #eef0fe;
+
+  /* Estado */
+  --cia-success: #067647;
+  --cia-success-bg: #ecfdf3;
+  --cia-warning: #b54708;
+  --cia-warning-bg: #fffaeb;
+  --cia-danger: #b42318;
+  --cia-danger-bg: #fef3f2;
+  --cia-info-bg: #eff4ff;
+
+  /* Forma */
+  --cia-radius-sm: 6px;
+  --cia-radius-md: 10px;
+  --cia-radius-lg: 16px;
+  --cia-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --cia-shadow-md: 0 2px 8px rgba(16, 24, 40, 0.08);
+
+  --cia-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --cia-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--cia-font-sans);
+  background: var(--cia-bg);
+  color: var(--cia-text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+code,
+pre {
+  font-family: var(--cia-font-mono);
+}
+
+a {
+  color: var(--cia-brand);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------- Utilidades compartidas entre secciones ---------- */
+
+.cia-card {
+  background: var(--cia-surface);
+  border: 1px solid var(--cia-border);
+  border-radius: var(--cia-radius-lg);
+  box-shadow: var(--cia-shadow-sm);
+  padding: 22px 24px;
+}
+
+.cia-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cia-text-secondary);
+  margin-bottom: 4px;
+}
+
+.cia-section-subtitle {
+  font-size: 13px;
+  color: var(--cia-text-muted);
+  margin-bottom: 16px;
+}
+
+.cia-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--cia-radius-sm);
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.cia-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.cia-btn--primary {
+  background: var(--cia-brand);
+  color: #fff;
+}
+.cia-btn--primary:not(:disabled):hover {
+  background: var(--cia-brand-dark);
+}
+
+.cia-btn--secondary {
+  background: #fff;
+  border-color: var(--cia-border-strong);
+  color: var(--cia-text);
+}
+.cia-btn--secondary:not(:disabled):hover {
+  background: var(--cia-surface-alt);
+}
+
+.cia-btn--ghost {
+  background: transparent;
+  color: var(--cia-text-secondary);
+}
+.cia-btn--ghost:not(:disabled):hover {
+  background: var(--cia-surface-alt);
+}
+
+.cia-empty {
+  color: var(--cia-text-muted);
+  font-size: 13.5px;
+  padding: 12px 0;
+}
+
+/* ---------- Patrones compartidos entre secciones del reporte ---------- */
+
+.cia-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cia-evidence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cia-evidence-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  color: var(--cia-text-secondary);
+  line-height: 1.5;
+}
+
+.cia-evidence-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--cia-brand);
+  opacity: 0.55;
+}
+
+.cia-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.cia-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cia-fact__label {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cia-text-muted);
+}
+
+.cia-fact__value {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--cia-text);
+  overflow-wrap: anywhere;
+}
+
+.cia-group-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cia-text);
+  margin-bottom: 10px;
+}
+
+.cia-group + .cia-group {
+  margin-top: 22px;
+}
+
+/* Tarjeta de item genérica (findings/risks/recommendations/endpoints) */
+.cia-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--cia-radius-md);
+  border: 1px solid var(--cia-border);
+  background: var(--cia-surface-alt);
+  font-size: 13.5px;
+  color: var(--cia-text);
+  line-height: 1.5;
+}
+
+.cia-item-card--warning {
+  background: var(--cia-warning-bg);
+  border-color: #fde7c7;
+  color: #7a3c0a;
+}
+
+.cia-item-card--danger {
+  background: var(--cia-danger-bg);
+  border-color: #fbd5d1;
+  color: #7a281e;
+}
+
+.cia-item-card--success {
+  background: var(--cia-success-bg);
+  border-color: #c9f3dd;
+  color: #05512f;
+}
+
+.cia-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cia-border-strong);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

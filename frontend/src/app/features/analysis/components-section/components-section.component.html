@@ -1,0 +1,32 @@
+<section class="cia-card components-section">
+  <h2 class="cia-section-title">Componentes</h2>
+  <p class="cia-section-subtitle">Detectados por convención de nombres de archivo según el stack identificado.</p>
+
+  @if (!hasAny) {
+    <cia-empty-state message="No se detectaron componentes con las convenciones conocidas." />
+  } @else {
+    <div class="components-grid">
+      @for (group of groups; track group.key) {
+        <div class="component-group" [class.component-group--empty]="group.paths.length === 0">
+          <button
+            type="button"
+            class="component-group__header"
+            [disabled]="group.paths.length === 0"
+            (click)="toggle(group.key)"
+          >
+            <span class="component-group__label">{{ group.label }}</span>
+            <span class="component-group__count">{{ group.paths.length }}</span>
+          </button>
+
+          @if (isExpanded(group.key) && group.paths.length) {
+            <ul class="component-group__paths">
+              @for (path of group.paths; track path) {
+                <li>{{ path }}</li>
+              }
+            </ul>
+          }
+        </div>
+      }
+    </div>
+  }
+</section>

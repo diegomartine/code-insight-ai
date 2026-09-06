@@ -1,0 +1,36 @@
+.cia-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.cia-badge--neutral {
+  background: var(--cia-surface-alt);
+  color: var(--cia-text-secondary);
+  border: 1px solid var(--cia-border);
+}
+
+.cia-badge--brand {
+  background: var(--cia-brand-light);
+  color: var(--cia-brand-dark);
+}
+
+.cia-badge--success {
+  background: var(--cia-success-bg);
+  color: var(--cia-success);
+}
+
+.cia-badge--warning {
+  background: var(--cia-warning-bg);
+  color: var(--cia-warning);
+}
+
+.cia-badge--danger {
+  background: var(--cia-danger-bg);
+  color: var(--cia-danger);
+}

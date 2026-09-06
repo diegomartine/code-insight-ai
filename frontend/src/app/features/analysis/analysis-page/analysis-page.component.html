@@ -1,0 +1,56 @@
+<div class="analysis-page">
+  <cia-repository-input
+    [loading]="isLoading"
+    (analyzeGithub)="onAnalyzeGithub($event)"
+    (analyzeZip)="onAnalyzeZip($event)"
+  />
+
+  @if (state() === 'loading') {
+    <div class="cia-card status-card status-card--loading">
+      <span class="spinner" aria-hidden="true"></span>
+      <div>
+        <p class="status-card__title">Analizando repositorio…</p>
+        <p class="status-card__hint">Esto puede tardar unos segundos dependiendo del tamaño del repositorio.</p>
+      </div>
+    </div>
+  }
+
+  @if (state() === 'error') {
+    <div class="cia-card status-card status-card--error">
+      <div>
+        <p class="status-card__title">No fue posible analizar el repositorio.</p>
+        <p class="status-card__hint">{{ errorMessage() }}</p>
+        <ul class="status-card__checklist">
+          <li>La URL de GitHub sea correcta y el repositorio sea público.</li>
+          <li>El archivo ZIP sea válido y no supere el tamaño máximo.</li>
+          <li>Tu conexión al backend esté disponible.</li>
+        </ul>
+      </div>
+      <button type="button" class="cia-btn cia-btn--secondary" (click)="retry()">Intentar de nuevo</button>
+    </div>
+  }
+
+  @if (state() === 'success' && result(); as data) {
+    <div class="results">
+      <div class="results__toolbar">
+        <span class="results__status">Análisis completado</span>
+        <button type="button" class="cia-btn cia-btn--primary" (click)="exportPdf()">
+          Exportar análisis PDF
+        </button>
+      </div>
+
+      <cia-summary-card [result]="data" />
+      <cia-functional-summary [summary]="data.functionalSummary" />
+      <cia-technology-section [technology]="data.technology" />
+      <cia-architecture-section [architecture]="data.architecture" [components]="data.components" />
+      <cia-components-section [components]="data.components" />
+      <cia-api-section [apis]="data.apis" />
+      <cia-insights-section
+        [findings]="data.findings"
+        [risks]="data.risks"
+        [recommendations]="data.recommendations"
+      />
+      <cia-code-samples-section [codeSamples]="data.codeSamples" />
+    </div>
+  }
+</div>

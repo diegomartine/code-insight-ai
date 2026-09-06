@@ -1,0 +1,43 @@
+<section class="cia-card architecture-section">
+  <h2 class="cia-section-title">Architecture</h2>
+
+  <div class="architecture-headline">
+    <span class="architecture-headline__pattern">{{ architecture.pattern }}</span>
+
+    <div class="architecture-headline__confidence" [class]="'architecture-headline__confidence--' + confidenceTone">
+      <span class="architecture-headline__confidence-label">Confidence</span>
+      <span class="architecture-headline__confidence-value">{{ confidencePercent }}%</span>
+    </div>
+  </div>
+
+  @if (diagramLayers.length >= 2) {
+    <div class="diagram">
+      @for (layer of diagramLayers; track layer.label; let last = $last) {
+        <div class="diagram__box">
+          <span class="diagram__box-label">{{ layer.label }}</span>
+          <span class="diagram__box-count">{{ layer.count }}</span>
+        </div>
+        @if (!last) {
+          <div class="diagram__arrow" aria-hidden="true">↓</div>
+        }
+      }
+    </div>
+  } @else {
+    <p class="cia-empty">
+      No hay suficiente evidencia de capas diferenciadas para construir un diagrama de arquitectura.
+    </p>
+  }
+
+  <div class="cia-group">
+    <h3 class="cia-group-title">Evidencia</h3>
+    @if (architecture.evidence.length) {
+      <ul class="cia-evidence-list">
+        @for (e of architecture.evidence; track e) {
+          <li>{{ e }}</li>
+        }
+      </ul>
+    } @else {
+      <p class="cia-empty">No se registró evidencia adicional.</p>
+    }
+  </div>
+</section>

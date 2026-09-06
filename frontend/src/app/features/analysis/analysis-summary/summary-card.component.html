@@ -1,0 +1,49 @@
+<section class="cia-card summary-card">
+  <div class="summary-card__title-row">
+    <h2 class="summary-card__project">{{ result.repository.name }}</h2>
+    <span class="summary-card__source">{{ result.repository.source === 'github' ? 'GitHub' : 'ZIP' }}</span>
+  </div>
+
+  @if (result.repository.description) {
+    <p class="summary-card__description">{{ result.repository.description }}</p>
+  }
+
+  <div class="summary-card__grid">
+    <div class="metric">
+      <span class="metric__label">Lenguaje</span>
+      <span class="metric__value">{{ result.technology.language ?? 'No determinado' }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric__label">Frameworks</span>
+      <span class="metric__value">
+        {{ result.technology.frameworks.length ? result.technology.frameworks.join(', ') : 'No determinado' }}
+      </span>
+    </div>
+    <div class="metric">
+      <span class="metric__label">Archivos</span>
+      <span class="metric__value">{{ result.structure.totalFiles }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric__label">Directorios</span>
+      <span class="metric__value">{{ result.structure.totalDirectories }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric__label">Endpoints</span>
+      <span class="metric__value">{{ result.apis.endpoints.length }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric__label">Arquitectura</span>
+      <span class="metric__value">{{ result.architecture.pattern }}</span>
+    </div>
+  </div>
+
+  <div class="confidence">
+    <div class="confidence__label-row">
+      <span>Confidence de arquitectura</span>
+      <span class="confidence__value">{{ confidencePercent }}%</span>
+    </div>
+    <div class="confidence__track">
+      <div class="confidence__fill" [style.width.%]="confidencePercent"></div>
+    </div>
+  </div>
+</section>
