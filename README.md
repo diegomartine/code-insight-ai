@@ -30,7 +30,7 @@ Code Insight AI automatiza una primera etapa de ingeniería inversa para identif
 
 ## Arquitectura
 
-text
+
 ┌─────────────────────────────┐
 │        Angular 20           │
 │          Frontend           │
@@ -62,7 +62,7 @@ text
 
 ### Flujo
 
-text
+
 GitHub URL / ZIP
        ↓
 Repository Loader
@@ -171,12 +171,12 @@ npm run start:dev
 
 API:
 
-text
+
 http://localhost:3000
 
 Swagger:
 
-text
+
 http://localhost:3000/docs
 
 ### Frontend
@@ -190,7 +190,7 @@ npm start
 
 Aplicación:
 
-text
+
 http://localhost:4200
 
 ## API
